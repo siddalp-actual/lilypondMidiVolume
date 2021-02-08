@@ -1,0 +1,2 @@
+# Always pair ipynb notebooks to script files
+default_jupytext_formats : notebook//ipynb,notebookScript//auto:percent
