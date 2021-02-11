@@ -5,17 +5,22 @@ timeAndKey =
 \include "articulate.ly"   % better midi dynamics
 
 myReg =
-#(define-scheme-function (parser location init-val)
-    (number?)
+#(define-scheme-function (parser location init-val init-incr)
+    (number? number?)
     ;; init-val is explicitly frozen in the local let environment
-    (let ((regVal init-val))
+    (let ((regVal init-val)   ;; initial value
+          (regIncr init-incr)  ;; and an increment
+        )
         (define (get-val)
             regVal)  ;; return the current value
         (define (set-val amount)
             (set! regVal (range-limit amount))
             regVal)  ;; return the set value
+        (define (set-incr new-incr)
+            (set! regIncr new-incr)
+            regIncr)  ;; return the set value
         (define (up-val)
-            (set! regVal (range-limit (* 1.2 (get-val))))
+            (set! regVal (range-limit (* regIncr (get-val))))
             regVal)  ;; return the new value
         (define (range-limit val)
             ;; limit val to [0, 1]
@@ -44,8 +49,11 @@ myReg =
 spf = #(make-dynamic-script "spf")
 rpf = #(make-dynamic-script "rpf")
 
-%#(define volume (myReg 0.8))  % 0.8 * 127 = 102
-#(define volume (myReg 0.1))  % 0.8 * 127 = 102
+% define the volume register to use myReg function with
+% initial values of 0.5 for volume and an increment multiplier
+% of 1.1x the current volume
+% volume ranges from 0 to 1 corresponding to midi velocity 0-127
+#(define volume (myReg 0.5 1.1))  % 0.5 * 127 = 63
 
 #(define (myDynamics dynamic)
     (cond

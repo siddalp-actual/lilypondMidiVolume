@@ -169,5 +169,19 @@ for i, midi_track in enumerate(midi_data.tracks):
 #     )
 # )
 # ``` 
+#  1) Override the volume function for the score so that it picks up the `myDynamics` function.
+#  ```
+#      \set Score.dynamicAbsoluteVolumeFunction = #myDynamics
+# ```
+
+# %% [markdown]
+# ## Example
+#
+# An working example of this technique can be found in `dynamicPart.ly`.  The functions in the example follow this technique, but have been enhanced.
+#
+# Should it be necessary to reset the volume or the increment, this can be done using lilypond instructions of the form:
+# ```
+# #(volume 'set-value 0.8)  % 0.8 * 127 = 102
+# ```
 
 # %%

@@ -1,0 +1,7 @@
+cmd: lilypond
+cwd: "{FILE_ACTIVE_PATH}"
+args:
+  - "'{FILE_ACTIVE_NAME}'"
+sh: true
+errorMatch: "(?<file>[\\/0-9a-zA-Z\\._ ]+):(?<line>\\d+):(?<col>\\d+):\\s+(?<message>.+)"
+warningMatch: "(?<file>[\\/0-9a-zA-Z\\._ ]+):(?<line>\\d+):(?<col>\\d+):\\s+(?<message>warning:.+)"

@@ -10,4 +10,5 @@ notebookScript/
   Repeat Volume.py : This is the python script representation of a jupyter notebook containing my notes
 repeatStave.ly : a simple lilypond piece used to create a midi file, dumped by the above notebook
 dynamicPart.ly : lilypond piece containing a simple repeating phrase which gets louder with each iteration.
+.atombuild.yaml : configuration for atom editor to build lilypond files
 ```
